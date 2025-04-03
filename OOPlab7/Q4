@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+class Person {
+protected:
+    string name, id, address, phoneNumber, email;
+public:
+    Person(string n, string i, string addr, string phone, string mail)
+        : name(n), id(i), address(addr), phoneNumber(phone), email(mail) {}
+    virtual void displayInfo() { cout << "Name: " << name << " ID: " << id << endl; }
+    virtual ~Person() {}
+};
+
+class Student : public Person {
+    int coursesEnrolled, enrollmentYear;
+    double GPA;
+public:
+    Student(string n, string i, string addr, string phone, string mail, int courses, double gpa, int year)
+        : Person(n, i, addr, phone, mail), coursesEnrolled(courses), GPA(gpa), enrollmentYear(year) {}
+    void displayInfo() override { cout << "Student Name: " << name << " GPA: " << GPA << endl; }
+};
+
+class Professor : public Person {
+    string department;
+    int coursesTaught;
+    double salary;
+public:
+    Professor(string n, string i, string addr, string phone, string mail, string dept, int courses, double sal)
+        : Person(n, i, addr, phone, mail), department(dept), coursesTaught(courses), salary(sal) {}
+    void displayInfo() override { cout << "Professor Name: " << name << " Department: " << department << endl; }
+};
+
+class Staff : public Person {
+    string department, position;
+    double salary;
+public:
+    Staff(string n, string i, string addr, string phone, string mail, string dept, string pos, double sal)
+        : Person(n, i, addr, phone, mail), department(dept), position(pos), salary(sal) {}
+    void displayInfo() override { cout << "Staff Name: " << name << " Position: " << position << endl; }
+};
+
+int main() {
+    Student s("Alice", "S123", "123 Street", "1234567890", "alice@mail.com", 5, 3.8, 2022);
+    Professor p("Dr. Smith", "P456", "456 Street", "9876543210", "smith@mail.com", "CS", 3, 80000);
+    Staff st("John", "ST789", "789 Street", "5678901234", "john@mail.com", "Admin", "Manager", 50000);
+    s.displayInfo();
+    p.displayInfo();
+    st.displayInfo();
+    return 0;
+}

@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+class Currency {
+protected:
+
+    double amount, exchangeRate;
+    string currencyCode, currencySymbol;
+public:
+
+    Currency(double amt, string code, string symbol, double rate = 1.0)
+
+        : amount(amt), currencyCode(code), currencySymbol(symbol), exchangeRate(rate) {}
+
+    virtual double convertToBase() { return amount * exchangeRate; }
+    virtual void displayCurrency() { cout << currencyCode << " " << amount << endl; }
+    virtual ~Currency() {}
+};
+
+class Dollar : public Currency {
+public:
+    Dollar(double amt) : Currency(amt, "USD", "$", 1.0) {}
+};
+
+class Euro : public Currency {
+public:
+    Euro(double amt) : Currency(amt, "EUR", "€", 1.1) {}
+};
+
+class Rupee : public Currency {
+public:
+    Rupee(double amt) : Currency(amt, "INR", "₹", 0.014) {}
+};
+
+int main() {
+
+    Dollar d(100);
+    Euro e(100);
+    Rupee r(100);
+    d.displayCurrency();
+    e.displayCurrency();
+    r.displayCurrency();
+    
+}
